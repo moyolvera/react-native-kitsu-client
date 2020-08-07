@@ -27,7 +27,11 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
     paddingBottom: 4,
-    paddingTop: 22,
+    paddingTop: 42,
+  },
+  image: {
+    width: 110,
+    height: 160,
   },
 });
 

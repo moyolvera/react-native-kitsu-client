@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Image } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { Container, Content, View, Text } from 'native-base';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { AuthStackParamList } from '../../../navigator/Navigator';
@@ -25,7 +25,10 @@ function Detail() {
             <View style={CommonStyles.flexRow}>
               <View style={styles.imageWrapper}>
                 {itemSelected.attributes.posterImage && itemSelected.attributes.posterImage.small && (
-                  <Image source={{ uri: itemSelected.attributes.posterImage.small, width: 160, height: 240 }} />
+                  <FastImage
+                    source={{ uri: itemSelected.attributes.posterImage.small, priority: FastImage.priority.normal }}
+                    style={styles.image}
+                  />
                 )}
               </View>
               <View style={[CommonStyles.flexOne, CommonStyles.paddingLeft10]}>

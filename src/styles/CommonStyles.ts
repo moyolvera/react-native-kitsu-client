@@ -5,7 +5,7 @@ const CommonStyles = StyleSheet.create({
     flex: 1,
   },
   flexRow: {
-    flex: 1,
+    flexDirection: 'row',
   },
   bigFont: {
     fontSize: 18,
@@ -47,7 +47,7 @@ const CommonStyles = StyleSheet.create({
     padding: 10,
   },
   padding20: {
-    paddingTop: 20,
+    padding: 20,
   },
 });
 

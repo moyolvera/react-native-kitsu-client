@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Image } from 'react-native';
 import { View, Text } from 'native-base';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
 
 import styles from './SectionSlider.styles';
 import { AxiosRequestResult } from '../../../declaration/global.td';
@@ -49,7 +49,10 @@ function SectionSlider({ title, service }: { title: string; service: () => Promi
                   navigate(SCREENS.DETAIL, { item });
                 }}>
                 {item.attributes.posterImage && item.attributes.posterImage.small && (
-                  <Image source={{ uri: item.attributes.posterImage.small, width: 110, height: 160 }} />
+                  <FastImage
+                    source={{ uri: item.attributes.posterImage.small, priority: FastImage.priority.normal }}
+                    style={styles.image}
+                  />
                 )}
                 <View style={styles.titleItemWrapper}>
                   <LinearGradient

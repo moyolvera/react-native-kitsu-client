@@ -5,6 +5,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  image: {
+    width: 160,
+    height: 240,
+  },
   imageWrapper: {
     width: 160,
     height: 240,
