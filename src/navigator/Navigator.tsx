@@ -3,10 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Detail, Home } from '../features';
+import { Anime } from '../declaration/types.td';
 
-type AuthStackParamList = {
+export type AuthStackParamList = {
   Home: undefined;
-  Detail: undefined;
+  Detail: { item: Anime };
 };
 
 const Stack = createStackNavigator<AuthStackParamList>();

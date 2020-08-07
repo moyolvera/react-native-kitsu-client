@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Image } from 'react-native';
+import { Image } from 'react-native';
 import { View, Text } from 'native-base';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 import styles from './SectionSlider.styles';
 import { AxiosRequestResult } from '../../../declaration/global.td';
 import useAxiosRequest from '../../../hooks/useAxiosRequest';
 import { Anime } from '../../../declaration/types.td';
 import { appendElipsisIfRequired } from '../../../modules/Util';
+import SCREENS from '../../../constants/screens';
 
 function SectionSlider({ title, service }: { title: string; service: () => Promise<Anime[]> }) {
   const [sectionItems, setSectionItems] = useState<Anime[]>([]);
   const sectionItemsRequest: AxiosRequestResult<Anime[]> = useAxiosRequest<Anime[]>(service);
+  const { navigate } = useNavigation();
 
   function handleSectionItemsRequest(allMoviesAxiosResult: AxiosRequestResult<Anime[]>) {
     if (allMoviesAxiosResult.state.data) {
@@ -43,10 +46,10 @@ function SectionSlider({ title, service }: { title: string; service: () => Promi
               <TouchableOpacity
                 style={styles.item}
                 onPress={function () {
-                  Alert.alert(JSON.stringify(item.attributes.titles));
+                  navigate(SCREENS.DETAIL, { item });
                 }}>
-                {item.attributes.posterImage && item.attributes.posterImage.tiny && (
-                  <Image source={{ uri: item.attributes.posterImage.tiny, width: 110, height: 160 }} />
+                {item.attributes.posterImage && item.attributes.posterImage.small && (
+                  <Image source={{ uri: item.attributes.posterImage.small, width: 110, height: 160 }} />
                 )}
                 <View style={styles.titleItemWrapper}>
                   <LinearGradient

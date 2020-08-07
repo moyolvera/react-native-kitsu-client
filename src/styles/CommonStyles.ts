@@ -1,6 +1,36 @@
 import { StyleSheet } from 'react-native';
 
 const CommonStyles = StyleSheet.create({
+  flexOne: {
+    flex: 1,
+  },
+  flexRow: {
+    flex: 1,
+  },
+  bigFont: {
+    fontSize: 18,
+  },
+  largeFont: {
+    fontSize: 20,
+  },
+  marginTop5: {
+    marginTop: 5,
+  },
+  marginTop10: {
+    marginTop: 10,
+  },
+  marginTop20: {
+    marginTop: 20,
+  },
+  marginBottom5: {
+    marginBottom: 5,
+  },
+  marginBottom10: {
+    marginBottom: 10,
+  },
+  marginBottom20: {
+    marginBottom: 20,
+  },
   paddingHorizontal10: {
     paddingHorizontal: 10,
   },
@@ -15,6 +45,9 @@ const CommonStyles = StyleSheet.create({
   },
   padding10: {
     padding: 10,
+  },
+  padding20: {
+    paddingTop: 20,
   },
 });
 
