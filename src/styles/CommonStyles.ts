@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StyleProp } from 'react-native';
 
 const CommonStyles = StyleSheet.create({
   flexOne: {
@@ -55,3 +55,11 @@ const CommonStyles = StyleSheet.create({
 });
 
 export default CommonStyles;
+
+export function createDynamicStyles<T>(styles?: StyleProp<T>) {
+  if (!styles) {
+    return {};
+  }
+
+  return StyleSheet.create({ styles }).styles as StyleProp<T>;
+}

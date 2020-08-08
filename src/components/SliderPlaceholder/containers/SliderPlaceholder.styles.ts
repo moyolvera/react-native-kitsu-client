@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     height: 160,
     width: 110,
     marginRight: 10,
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#101010',
   },
   list: {
     width: '100%',

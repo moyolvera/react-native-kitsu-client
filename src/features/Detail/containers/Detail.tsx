@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, Content, View, Text } from 'native-base';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
 import { AuthStackParamList } from '../../../navigator/Navigator';
 import { Anime } from '../../../declaration/types.td';
-import CommonStyles from '../../../styles/CommonStyles';
+import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
 import styles from './Detail.styles';
-import { FastImageWrapper } from '../../../components';
+import { FastImageWrapper, Label } from '../../../components';
 import LOCAL_DIMENSIONS from '../../../constants/dimensions';
+import { ColorContext } from '../../../context/ColorContext';
+import { ViewStyle } from 'react-native';
 
 function Detail() {
   const { params } = useRoute<RouteProp<AuthStackParamList, 'Detail'>>();
-  const [itemSelected, setItemSelected] = useState<Anime>();
+  const { colors } = useContext(ColorContext);
 
+  const [itemSelected, setItemSelected] = useState<Anime>();
   const [videoHeight, setVideoHeigght] = useState(0);
 
   useEffect(() => {
@@ -23,7 +26,7 @@ function Detail() {
   }, [params?.item]);
 
   return (
-    <Container>
+    <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })}>
       <Content>
         {itemSelected && (
           <>
@@ -33,21 +36,24 @@ function Detail() {
                   <FastImageWrapper item={itemSelected} height={240} width={160} />
                 )}
                 <View style={[CommonStyles.flexOne]}>
-                  <Text style={styles.title}>{itemSelected.attributes.canonicalTitle}</Text>
+                  <Label style={styles.title} label={itemSelected.attributes.canonicalTitle} />
                   {itemSelected.attributes.abbreviatedTitles &&
                     itemSelected.attributes.abbreviatedTitles.map((abbreviatedTitle, index) => (
-                      <Text key={`${abbreviatedTitle}-${index}`}>{abbreviatedTitle}</Text>
+                      <Label key={`${abbreviatedTitle}-${index}`} label={abbreviatedTitle} />
                     ))}
                   {itemSelected.attributes.titles &&
-                    Object.values(itemSelected.attributes.titles).map((abbreviatedTitle, index) => (
-                      <Text key={`${abbreviatedTitle}-${index}`}>{abbreviatedTitle}</Text>
+                    Object.values(itemSelected.attributes.titles).map((title, index) => (
+                      <Label key={`${title}-${index}`} label={title} />
                     ))}
-                  <Text style={[CommonStyles.marginTop5, CommonStyles.bigFont]}>Type</Text>
-                  <Text style={CommonStyles.marginBottom5}>{`${String(itemSelected.type).toUpperCase()}, ${String(
-                    itemSelected.attributes.episodeCount
-                  )}`}</Text>
-                  <Text style={CommonStyles.bigFont}>Year</Text>
-                  <Text>{`${itemSelected.attributes.startDate} - ${itemSelected.attributes.endDate}`}</Text>
+                  <Label style={[CommonStyles.marginTop5, CommonStyles.bigFont]} label="Type" />
+                  <Label
+                    style={CommonStyles.marginBottom5}
+                    label={`${String(itemSelected.type).toUpperCase()}, ${String(
+                      itemSelected.attributes.episodeCount
+                    )}`}
+                  />
+                  <Label style={CommonStyles.bigFont} label="Year" />
+                  <Label label={`${itemSelected.attributes.startDate} - ${itemSelected.attributes.endDate}`} />
                 </View>
               </View>
             </View>
@@ -69,32 +75,32 @@ function Detail() {
             )}
             <View style={CommonStyles.padding20}>
               <View style={CommonStyles.marginTop40}>
-                <Text style={CommonStyles.bigFont}>Genres</Text>
-                <Text>Genres list</Text>
+                <Label style={CommonStyles.bigFont} label="Genres" />
+                <Label label="Genres list" />
               </View>
               <View style={[CommonStyles.flexRow, CommonStyles.marginTop20]}>
                 <View style={CommonStyles.flexOne}>
-                  <Text style={CommonStyles.bigFont}>Average Rating</Text>
-                  <Text>{itemSelected.attributes.averageRating}</Text>
+                  <Label label="Average Rating" style={CommonStyles.bigFont} />
+                  <Label label={itemSelected.attributes.averageRating} />
                 </View>
                 <View style={CommonStyles.flexOne}>
-                  <Text style={CommonStyles.bigFont}>Age Rating</Text>
-                  <Text>{`${itemSelected.attributes.ageRating}. ${itemSelected.attributes.ageRatingGuide}`}</Text>
+                  <Label label="Age Rating" style={CommonStyles.bigFont} />
+                  <Label label={`${itemSelected.attributes.ageRating}. ${itemSelected.attributes.ageRatingGuide}`} />
                 </View>
               </View>
               <View style={[CommonStyles.flexRow, CommonStyles.marginTop20]}>
                 <View style={CommonStyles.flexOne}>
-                  <Text style={CommonStyles.bigFont}>Episode Duration</Text>
-                  <Text>{itemSelected.attributes.episodeLength}</Text>
+                  <Label label="Episode Duration" style={CommonStyles.bigFont} />
+                  <Label label={String(itemSelected.attributes.episodeLength)} />
                 </View>
                 <View style={CommonStyles.flexOne}>
-                  <Text style={CommonStyles.bigFont}>Airing Status</Text>
-                  <Text>{String(itemSelected.attributes.status).toUpperCase()}</Text>
+                  <Label label="Airing Status" style={CommonStyles.bigFont} />
+                  <Label label={String(itemSelected.attributes.status).toUpperCase()} />
                 </View>
               </View>
               <View style={styles.synopsisWrapper}>
-                <Text style={[CommonStyles.marginBottom20, CommonStyles.bigFont]}>Synopsis</Text>
-                <Text>{itemSelected.attributes.synopsis}</Text>
+                <Label label="Synopsis" style={[CommonStyles.marginBottom20, CommonStyles.bigFont]} />
+                <Label label={itemSelected.attributes.synopsis} />
               </View>
             </View>
           </>

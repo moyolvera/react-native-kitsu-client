@@ -4,7 +4,6 @@ import LOCAL_DIMENSIONS from '../../../constants/dimensions';
 const styles = StyleSheet.create({
   headerWrapper: {
     height: Platform.OS === 'ios' ? 45 : 57,
-    backgroundColor: '#fff',
     borderBottomColor: '#e3e3e3',
   },
   leftWrapperForce: {
@@ -36,7 +35,6 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     flexDirection: 'row',
-    backgroundColor: '#dcdcdc',
     height: Platform.OS === 'ios' ? 30 : 45,
     borderRadius: Platform.OS === 'ios' ? 15 : 3,
     paddingHorizontal: 5,
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 10,
     paddingVertical: 10,
-    borderBottomColor: '#f0f0f0',
+    borderBottomColor: '#2b2b2b',
     borderBottomWidth: 1,
   },
   recentIcon: {
@@ -93,7 +91,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     zIndex: 99,
-    backgroundColor: '#fff',
     width: '100%',
     height: LOCAL_DIMENSIONS.HEIGHT - 120,
   },

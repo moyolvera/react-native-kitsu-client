@@ -1,9 +1,10 @@
 import React from 'react';
+import { ViewStyle } from 'react-native';
 import { Container, Content } from 'native-base';
 
 import { Loader, SectionSlider } from '../../../components';
 import useHome from '../hooks/useHome';
-import CommonStyles from '../../../styles/CommonStyles';
+import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
 import {
   getActionItems,
   getDramaItems,
@@ -14,10 +15,10 @@ import {
 } from '../services/HomeServices';
 
 function Home() {
-  const { isLoading } = useHome();
+  const { colors, isLoading } = useHome();
 
   return (
-    <Container>
+    <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.BACKGROUND })}>
       <Loader isLoading={isLoading} />
       <Content contentContainerStyle={[CommonStyles.paddingLeft10, CommonStyles.paddingTop20]}>
         <SectionSlider title="Action" service={getActionItems} />

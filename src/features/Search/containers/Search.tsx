@@ -1,15 +1,16 @@
 import React from 'react';
-import { TextInput, TouchableOpacity, FlatList, Platform } from 'react-native';
+import { TextInput, TouchableOpacity, FlatList, Platform, ViewStyle } from 'react-native';
 import { Container, Content, Header, Left, Icon, Body, Right, Text, View } from 'native-base';
 
 import useSearch from '../hooks/useSearch';
 import styles from './Search.styles';
-import CommonStyles from '../../../styles/CommonStyles';
+import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
 import { Loader } from '../../../components';
 import { FastImageWrapper } from '../../../components';
 
 const Search = () => {
   const {
+    colors,
     goBack,
     handleClearSearch,
     handleSearch,
@@ -25,9 +26,18 @@ const Search = () => {
   } = useSearch();
 
   return (
-    <Container>
+    <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })}>
       <Loader isLoading={isLoading} />
-      <Header style={styles.headerWrapper}>
+      <Header
+        style={[
+          styles.headerWrapper,
+          createDynamicStyles<ViewStyle>({
+            backgroundColor: colors.CONTAINER,
+            borderBottomWidth: 1,
+            borderBottomColor: '#2b2b2b',
+            shadowColor: 'transparent',
+          }),
+        ]}>
         <Left style={[styles.leftWrapper, Platform.OS === 'android' && styles.leftWrapperForce]}>
           <TouchableOpacity style={styles.backWrapper} onPress={goBack}>
             <Icon
@@ -39,7 +49,7 @@ const Search = () => {
           </TouchableOpacity>
         </Left>
         <Body style={styles.bodyWrapper}>
-          <View style={styles.inputWrapper}>
+          <View style={[styles.inputWrapper, createDynamicStyles<ViewStyle>({ backgroundColor: colors.BACKGROUND })]}>
             <Icon name="search" type="Feather" style={styles.inputSearchIcon} />
             <TextInput
               ref={inputRef}
@@ -64,7 +74,8 @@ const Search = () => {
       </Header>
       <Content>
         {shouldShowRecentList && (
-          <View style={styles.recentListWrapper}>
+          <View
+            style={[styles.recentListWrapper, createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })]}>
             <FlatList
               data={recentItems}
               style={[CommonStyles.paddingTop10]}

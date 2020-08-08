@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text } from 'native-base';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -8,8 +8,13 @@ import FastImageWrapper from '../../FastImageWrapper/containers/FastImageWrapper
 import useAxiosRequest from '../../../hooks/useAxiosRequest';
 import styles from './SectionSlider.styles';
 import SliderPlaceholder from '../../SliderPlaceholder/containers/SliderPlaceholder';
+import { ColorContext } from '../../../context/ColorContext';
+import { createDynamicStyles } from '../../../styles/CommonStyles';
+import { TextStyle } from 'react-native';
+import Label from '../../Label/containers/Label';
 
 function SectionSlider({ title, service }: { title: string; service: () => Promise<Anime[]> }) {
+  const { colors } = useContext(ColorContext);
   const [sectionItems, setSectionItems] = useState<Anime[]>([]);
   const sectionItemsRequest: AxiosRequestResult<Anime[]> = useAxiosRequest<Anime[]>(service);
 
@@ -30,7 +35,7 @@ function SectionSlider({ title, service }: { title: string; service: () => Promi
   return (
     <View style={styles.sectionWrapper}>
       <View style={styles.sectionTitleWrapper}>
-        <Text>{title}</Text>
+        <Label label={title} />
       </View>
       <View>
         {sectionItems.length === 0 ? (

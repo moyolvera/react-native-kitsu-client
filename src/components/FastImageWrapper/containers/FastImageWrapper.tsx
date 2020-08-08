@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Icon } from 'native-base';
+import { View, Icon } from 'native-base';
 import FastImage from 'react-native-fast-image';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -10,6 +10,7 @@ import { appendElipsisIfRequired } from '../../../modules/Util';
 import { Anime } from '../../../declaration/types.td';
 import styles from './FastImageWrapper.styles';
 import { StyleProp, ViewStyle } from 'react-native';
+import Label from '../../Label/containers/Label';
 
 function FastImageWrapper({
   item,
@@ -54,9 +55,10 @@ function FastImageWrapper({
           end={{ x: 0.0, y: 0.0 }}
           locations={[0, 0.9]}
           colors={['#000', '#ffffff00']}>
-          <Text style={styles.title}>
-            {appendElipsisIfRequired(String(item.attributes.titles.en || item.attributes.titles.en_jp), 10)}
-          </Text>
+          <Label
+            label={appendElipsisIfRequired(String(item.attributes.titles.en || item.attributes.titles.en_jp), 10)}
+            style={styles.title}
+          />
         </LinearGradient>
       </View>
     </TouchableOpacity>

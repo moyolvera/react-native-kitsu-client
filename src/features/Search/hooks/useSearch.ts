@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AxiosRequestResult } from '../../../declaration/global.td';
@@ -6,10 +6,12 @@ import { Anime } from '../../../declaration/types.td';
 import useAxiosRequest from '../../../hooks/useAxiosRequest';
 import { getSearchItems } from '../services/SearchService';
 import { getTypedKey, setKey, StorageKeys } from '../../../modules/Storage';
+import { ColorContext } from '../../../context/ColorContext';
 
 function useSearch() {
   const inputRef = React.createRef<TextInput>();
   const { goBack } = useNavigation();
+  const { colors } = useContext(ColorContext);
   const searchItemsRequest: AxiosRequestResult<Anime[]> = useAxiosRequest<Anime[]>(getSearchItems);
 
   const [search, setSearch] = useState('');
@@ -80,6 +82,7 @@ function useSearch() {
   }, []);
 
   return {
+    colors,
     goBack,
     handleClearSearch,
     handleSearch,

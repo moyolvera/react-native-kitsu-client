@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     paddingTop: 42,
   },
   title: {
-    color: 'white',
     textAlign: 'center',
     width: '100%',
   },
