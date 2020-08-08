@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import FastImage from 'react-native-fast-image';
 import { Container, Content, View, Text } from 'native-base';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { AuthStackParamList } from '../../../navigator/Navigator';
 import { Anime } from '../../../declaration/types.td';
 import CommonStyles from '../../../styles/CommonStyles';
 import styles from './Detail.styles';
+import { FastImageWrapper } from '../../../components';
 
 function Detail() {
   const { params } = useRoute<RouteProp<AuthStackParamList, 'Detail'>>();
@@ -23,15 +23,10 @@ function Detail() {
         {itemSelected && (
           <>
             <View style={CommonStyles.flexRow}>
-              <View style={styles.imageWrapper}>
-                {itemSelected.attributes.posterImage && itemSelected.attributes.posterImage.small && (
-                  <FastImage
-                    source={{ uri: itemSelected.attributes.posterImage.small, priority: FastImage.priority.normal }}
-                    style={styles.image}
-                  />
-                )}
-              </View>
-              <View style={[CommonStyles.flexOne, CommonStyles.paddingLeft10]}>
+              {itemSelected.attributes.posterImage && itemSelected.attributes.posterImage.small && (
+                <FastImageWrapper item={itemSelected} height={240} width={160} />
+              )}
+              <View style={[CommonStyles.flexOne]}>
                 <Text style={styles.title}>{itemSelected.attributes.canonicalTitle}</Text>
                 {itemSelected.attributes.abbreviatedTitles &&
                   itemSelected.attributes.abbreviatedTitles.map((abbreviatedTitle) => <Text>{abbreviatedTitle}</Text>)}
