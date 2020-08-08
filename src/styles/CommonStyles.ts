@@ -22,6 +22,9 @@ const CommonStyles = StyleSheet.create({
   marginTop20: {
     marginTop: 20,
   },
+  marginTop40: {
+    marginTop: 40,
+  },
   marginBottom5: {
     marginBottom: 5,
   },
