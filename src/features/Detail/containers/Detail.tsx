@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Content, View, Text } from 'native-base';
+import { Container, Content, View, Icon } from 'native-base';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
@@ -10,14 +10,57 @@ import styles from './Detail.styles';
 import { FastImageWrapper, Label } from '../../../components';
 import LOCAL_DIMENSIONS from '../../../constants/dimensions';
 import { ColorContext } from '../../../context/ColorContext';
-import { ViewStyle } from 'react-native';
+import { FavoritesContext } from '../../../context/FavoritesContext';
+import { ViewStyle, TextStyle } from 'react-native';
+import { setKey, StorageKeys } from '../../../modules/Storage';
 
 function Detail() {
   const { params } = useRoute<RouteProp<AuthStackParamList, 'Detail'>>();
   const { colors } = useContext(ColorContext);
+  const { favorites, setFavorites } = useContext(FavoritesContext);
 
   const [itemSelected, setItemSelected] = useState<Anime>();
   const [videoHeight, setVideoHeigght] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  async function verifyIsFavorite() {
+    if (!itemSelected || !itemSelected.id) {
+      return;
+    }
+
+    const itemIsFavorite = favorites.some((item) => String(item) === String(itemSelected.id));
+    setIsFavorite(itemIsFavorite);
+  }
+  async function setItemAsFavorite() {
+    if (!itemSelected || !itemSelected.id || !setFavorites) {
+      return;
+    }
+
+    const updatedFavorites = [...favorites];
+    updatedFavorites.push(itemSelected.id);
+
+    await setKey(StorageKeys.FAVORITES, JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
+  }
+
+  async function removeItemAsFavorite() {
+    if (!itemSelected || !itemSelected.id || !setFavorites) {
+      return;
+    }
+
+    const updatedFavorites = favorites.filter((item) => item === itemSelected.id);
+
+    await setKey(StorageKeys.FAVORITES, JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
+  }
+
+  async function toggleAsFavorite() {
+    if (!isFavorite) {
+      await setItemAsFavorite();
+    } else {
+      await removeItemAsFavorite();
+    }
+  }
 
   useEffect(() => {
     if (params?.item) {
@@ -25,18 +68,34 @@ function Detail() {
     }
   }, [params?.item]);
 
+  useEffect(() => {
+    verifyIsFavorite();
+  }, [favorites, itemSelected]);
+
   return (
     <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })}>
       <Content>
         {itemSelected && (
           <>
             <View style={CommonStyles.padding20}>
+              <View style={[CommonStyles.marginBottom20, CommonStyles.flexRow]}>
+                <View style={styles.titleWrapper}>
+                  <Label style={styles.title} label={itemSelected.attributes.canonicalTitle} />
+                </View>
+                <View style={styles.starWrapper}>
+                  <Icon
+                    name={!isFavorite ? 'star-border' : 'star'}
+                    type="MaterialIcons"
+                    style={createDynamicStyles<TextStyle>({ color: !isFavorite ? '#ffffff' : '#ffff00' })}
+                    onPress={toggleAsFavorite}
+                  />
+                </View>
+              </View>
               <View style={CommonStyles.flexRow}>
                 {itemSelected.attributes.posterImage && itemSelected.attributes.posterImage.small && (
                   <FastImageWrapper item={itemSelected} height={240} width={160} />
                 )}
                 <View style={[CommonStyles.flexOne]}>
-                  <Label style={styles.title} label={itemSelected.attributes.canonicalTitle} />
                   {itemSelected.attributes.abbreviatedTitles &&
                     itemSelected.attributes.abbreviatedTitles.map((abbreviatedTitle, index) => (
                       <Label key={`${abbreviatedTitle}-${index}`} label={abbreviatedTitle} />

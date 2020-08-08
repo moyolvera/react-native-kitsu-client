@@ -17,6 +17,14 @@ const styles = StyleSheet.create({
   synopsisWrapper: {
     marginVertical: 30,
   },
+  titleWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  starWrapper: {
+    width: 50,
+    alignItems: 'flex-end',
+  },
 });
 
 export default styles;
