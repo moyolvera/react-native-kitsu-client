@@ -7,6 +7,7 @@ import { AxiosRequestResult } from '../../../declaration/global.td';
 import FastImageWrapper from '../../FastImageWrapper/containers/FastImageWrapper';
 import useAxiosRequest from '../../../hooks/useAxiosRequest';
 import styles from './SectionSlider.styles';
+import SliderPlaceholder from '../../SliderPlaceholder/containers/SliderPlaceholder';
 
 function SectionSlider({ title, service }: { title: string; service: () => Promise<Anime[]> }) {
   const [sectionItems, setSectionItems] = useState<Anime[]>([]);
@@ -32,14 +33,18 @@ function SectionSlider({ title, service }: { title: string; service: () => Promi
         <Text>{title}</Text>
       </View>
       <View>
-        <FlatList
-          horizontal
-          data={sectionItems}
-          showsHorizontalScrollIndicator={false}
-          renderItem={function ({ item }) {
-            return <FastImageWrapper item={item} width={110} height={160} />;
-          }}
-        />
+        {sectionItems.length === 0 ? (
+          <SliderPlaceholder />
+        ) : (
+          <FlatList
+            horizontal
+            data={sectionItems}
+            showsHorizontalScrollIndicator={false}
+            renderItem={function ({ item }) {
+              return <FastImageWrapper item={item} width={110} height={160} />;
+            }}
+          />
+        )}
       </View>
     </View>
   );
