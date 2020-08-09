@@ -10,6 +10,7 @@ import { ViewStyle, TextStyle } from 'react-native';
 import { ColorContext } from '../context/ColorContext';
 import TabBarNavigator from './TabBarNavigator';
 import { getHeaderTitle } from './config/Navigators.config';
+import SCREENS from '../constants/screens';
 
 export type AuthStackParamList = {
   Home: undefined;
@@ -40,7 +41,8 @@ function Navigator() {
           component={TabBarNavigator}
           options={({ route }) => ({
             headerTitle: getHeaderTitle(route),
-            headerRight: () => <HeaderSearchButton name={getHeaderTitle(route)} />,
+            headerRight: () =>
+              getHeaderTitle(route) !== SCREENS.FAVORITES ? <HeaderSearchButton name={getHeaderTitle(route)} /> : <></>,
           })}
         />
         <Stack.Screen name="Detail" component={Detail} />
