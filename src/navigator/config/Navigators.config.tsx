@@ -13,7 +13,7 @@ const getTabsConfig = (colors: ColorScheme): TabsConfig<FlashyTabBarItemConfig> 
       color: colors.TEXT,
     },
     icon: {
-      component: ({ color, size }) => <Icon name="airplay" type="Feather" style={{ color, fontSize: size }} />,
+      component: ({ color, size }) => <Icon name="film" type="Feather" style={{ color, fontSize: size }} />,
       color: '#666',
     },
     indicator: {
@@ -26,7 +26,7 @@ const getTabsConfig = (colors: ColorScheme): TabsConfig<FlashyTabBarItemConfig> 
       color: colors.TEXT,
     },
     icon: {
-      component: ({ color, size }) => <Icon name="film" type="Feather" style={{ color, fontSize: size }} />,
+      component: ({ color, size }) => <Icon name="book" type="Feather" style={{ color, fontSize: size }} />,
       color: '#666',
     },
     indicator: {

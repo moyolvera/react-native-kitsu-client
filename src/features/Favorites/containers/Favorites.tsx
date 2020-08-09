@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { ViewStyle } from 'react-native';
-import { Container, Content, View } from 'native-base';
+import { Content, View } from 'native-base';
 
-import { Loader, Label, FastImageWrapper, EmptyFavorites } from '../../../components';
+import { Loader, Label, FastImageWrapper, EmptyFavorites, FeatureContainer } from '../../../components';
 import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
 
 import { useRoute, RouteProp } from '@react-navigation/native';
@@ -16,7 +16,7 @@ function Favorites() {
   const { animes, colors, isLoading, mangas } = useFavorites();
 
   return (
-    <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.BACKGROUND, paddingBottom })}>
+    <FeatureContainer styles={createDynamicStyles<ViewStyle>({ backgroundColor: colors.BACKGROUND, paddingBottom })}>
       <Loader isLoading={isLoading} />
       <Content contentContainerStyle={[CommonStyles.paddingLeft10, CommonStyles.paddingTop20]}>
         <Label label="Favorite Animes" style={styles.title} />
@@ -40,7 +40,7 @@ function Favorites() {
           <EmptyFavorites />
         )}
       </Content>
-    </Container>
+    </FeatureContainer>
   );
 }
 

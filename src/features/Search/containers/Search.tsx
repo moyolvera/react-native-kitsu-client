@@ -5,7 +5,7 @@ import { Container, Content, Header, Left, Icon, Body, Right, Text, View } from 
 import useSearch from '../hooks/useSearch';
 import styles from './Search.styles';
 import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
-import { Loader } from '../../../components';
+import { Loader, OfflineBarIndicator } from '../../../components';
 import { FastImageWrapper } from '../../../components';
 
 const Search = () => {
@@ -18,6 +18,7 @@ const Search = () => {
     inputRecoverFocus,
     inputRef,
     isLoading,
+    isOnline,
     processAndPerformSearch,
     recentItems,
     search,
@@ -73,6 +74,7 @@ const Search = () => {
           </TouchableOpacity>
         </Right>
       </Header>
+      {!isOnline && <OfflineBarIndicator />}
       <Content>
         {shouldShowRecentList && (
           <View

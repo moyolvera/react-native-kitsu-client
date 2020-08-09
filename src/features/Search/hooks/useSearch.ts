@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, Alert } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { AxiosRequestResult } from '../../../declaration/global.td';
 import { Anime } from '../../../declaration/types.td';
@@ -9,11 +9,13 @@ import { getTypedKey, setKey, StorageKeys } from '../../../modules/Storage';
 import { ColorContext } from '../../../context/ColorContext';
 import { AuthStackParamList } from '../../../navigator/Navigator';
 import { ITEM_TYPE } from '../../../constants/common';
+import { ConnectionContext } from '../../../context/ConnectionContext';
 
 function useSearch() {
   const inputRef = React.createRef<TextInput>();
   const { goBack } = useNavigation();
   const { colors } = useContext(ColorContext);
+  const { isOnline } = useContext(ConnectionContext);
   const { params } = useRoute<RouteProp<AuthStackParamList, 'Search'>>();
 
   const [search, setSearch] = useState('');
@@ -44,6 +46,14 @@ function useSearch() {
   }
 
   async function processAndPerformSearch(searchItem: string) {
+    if (isOnline) {
+      Alert.alert(
+        'Atention',
+        "It appears you don't have internet connection so we couldn't perform the search. Check your network settings and try again"
+      );
+      return;
+    }
+
     const updatedRecent = [...recentItems, searchItem];
 
     setRecentItems(updatedRecent);
@@ -103,6 +113,7 @@ function useSearch() {
     inputRecoverFocus,
     inputRef,
     isLoading: searchItemsRequest.state.isLoading,
+    isOnline,
     processAndPerformSearch,
     recentItems,
     search,

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Content, View, Icon } from 'native-base';
+import { Content, View, Icon } from 'native-base';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ViewStyle, TextStyle } from 'react-native';
 
 import useDetail from '../hooks/useDetail';
 import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
-import { FastImageWrapper, Label } from '../../../components';
+import { FastImageWrapper, Label, FeatureContainer } from '../../../components';
 import LOCAL_DIMENSIONS from '../../../constants/dimensions';
 import styles from './Detail.styles';
 
@@ -13,7 +13,7 @@ function Detail() {
   const { colors, isFavorite, itemSelected, setVideoHeigght, toggleAsFavorite, videoHeight } = useDetail();
 
   return (
-    <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })}>
+    <FeatureContainer styles={createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })}>
       <Content>
         {itemSelected && (
           <>
@@ -105,7 +105,7 @@ function Detail() {
           </>
         )}
       </Content>
-    </Container>
+    </FeatureContainer>
   );
 }
 

@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { ViewStyle } from 'react-native';
-import { Container, Content } from 'native-base';
+import { Content } from 'native-base';
 import { useRoute, RouteProp } from '@react-navigation/native';
 
-import { Loader, SectionSlider, Label } from '../../../components';
+import { Loader, SectionSlider, Label, FeatureContainer } from '../../../components';
 import useMangas from '../hooks/useMangas';
 import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
 import {
@@ -23,7 +23,7 @@ function Mangas() {
   const paddingBottom = useMemo(() => params?.paddingBottom || 0, [params]);
 
   return (
-    <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.BACKGROUND, paddingBottom })}>
+    <FeatureContainer styles={createDynamicStyles<ViewStyle>({ backgroundColor: colors.BACKGROUND, paddingBottom })}>
       <Loader isLoading={isLoading} />
       <Content contentContainerStyle={[CommonStyles.paddingLeft10, CommonStyles.paddingTop20]}>
         <Label label="List of Mangas" style={styles.title} />
@@ -34,7 +34,7 @@ function Mangas() {
         <SectionSlider title="Science Fiction" service={getScienceFictionItems} />
         <SectionSlider title="Thriller" service={getThrillerItems} />
       </Content>
-    </Container>
+    </FeatureContainer>
   );
 }
 
