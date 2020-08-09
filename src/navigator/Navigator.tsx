@@ -3,11 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { HeaderSearchButton } from '../components';
-import { Detail, Home, Search } from '../features';
+import { Detail, Search } from '../features';
 import { Anime } from '../declaration/types.td';
 import { createDynamicStyles } from '../styles/CommonStyles';
 import { ViewStyle, TextStyle } from 'react-native';
 import { ColorContext } from '../context/ColorContext';
+import TabBarNavigator from './TabBarNavigator';
 
 export type AuthStackParamList = {
   Home: undefined;
@@ -35,7 +36,7 @@ function Navigator() {
         }}>
         <Stack.Screen
           name="Home"
-          component={Home}
+          component={TabBarNavigator}
           options={{
             headerTitle: 'Kitsu',
             headerRight: () => <HeaderSearchButton />,

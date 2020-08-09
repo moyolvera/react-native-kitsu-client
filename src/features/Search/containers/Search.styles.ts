@@ -85,7 +85,12 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+  },
+  itemStyle: {
+    marginLeft: 0,
+    marginRight: 0,
+    marginBottom: 20,
   },
   recentListWrapper: {
     position: 'absolute',
@@ -93,11 +98,6 @@ const styles = StyleSheet.create({
     zIndex: 99,
     width: '100%',
     height: LOCAL_DIMENSIONS.HEIGHT - 120,
-  },
-  itemStyle: {
-    marginLeft: 0,
-    marginRight: 0,
-    marginBottom: 20,
   },
 });
 

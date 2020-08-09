@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ViewStyle } from 'react-native';
 import { Container, Content } from 'native-base';
 
 import { Loader, SectionSlider, Label } from '../../../components';
-import useHome from '../hooks/useHome';
+import useAnimes from '../hooks/useAnimes';
 import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
 import {
   getActionItems,
@@ -12,14 +12,18 @@ import {
   getRomanceItems,
   getScienceFictionItems,
   getThrillerItems,
-} from '../services/HomeServices';
-import styles from './Home.styles';
+} from '../services/AnimesServices';
+import styles from './Animes.styles';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { TabStackParamList } from '../../../navigator/TabBarNavigator';
 
-function Home() {
-  const { colors, isLoading } = useHome();
+function Animes() {
+  const { colors, isLoading } = useAnimes();
+  const { params } = useRoute<RouteProp<TabStackParamList, 'Animes'>>();
+  const paddingBottom = useMemo(() => params?.paddingBottom || 0, [params]);
 
   return (
-    <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.BACKGROUND })}>
+    <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.BACKGROUND, paddingBottom })}>
       <Loader isLoading={isLoading} />
       <Content contentContainerStyle={[CommonStyles.paddingLeft10, CommonStyles.paddingTop20]}>
         <Label label="List of Animes" style={styles.title} />
@@ -34,4 +38,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Animes;

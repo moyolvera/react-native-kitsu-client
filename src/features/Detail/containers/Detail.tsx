@@ -25,6 +25,7 @@ function Detail() {
 
   async function verifyIsFavorite() {
     if (!itemSelected || !itemSelected.id) {
+      console.log(isFavorite);
       return;
     }
 
@@ -48,7 +49,7 @@ function Detail() {
       return;
     }
 
-    const updatedFavorites = favorites.filter((item) => item === itemSelected.id);
+    const updatedFavorites = favorites.filter((item) => item !== itemSelected.id);
 
     await setKey(StorageKeys.FAVORITES, JSON.stringify(updatedFavorites));
     setFavorites(updatedFavorites);
@@ -64,6 +65,7 @@ function Detail() {
 
   useEffect(() => {
     if (params?.item) {
+      console.log(params.item);
       setItemSelected(params.item);
     }
   }, [params?.item]);

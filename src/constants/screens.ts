@@ -1,6 +1,7 @@
 const SCREENS = {
+  ANIMES: 'Animes',
   DETAIL: 'Detail',
-  HOME: 'Home',
+  FAVORITES: 'Favorites',
   SEARCH: 'Search',
 };
 

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ColorContext } from '../../../context/ColorContext';
 
-function useHome() {
+function useAnimes() {
   const { colors } = useContext(ColorContext);
 
   return {
@@ -10,4 +10,4 @@ function useHome() {
   };
 }
 
-export default useHome;
+export default useAnimes;

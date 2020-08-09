@@ -5,7 +5,7 @@ export type AnyType = any;
 
 export type AxiosRequestResult<T> = {
   state: AxiosRequestState<T>;
-  triggerRequest: (params?: string) => Promise<void>;
+  triggerRequest: (params?: AnyType) => Promise<void>;
 };
 
 export type ColorScheme = {
@@ -14,4 +14,14 @@ export type ColorScheme = {
   DETAILS: string;
   TEXT: string;
   STATUS_BAR: string;
+};
+
+export type FavoriteData<T> = {
+  animes: T[];
+  series: T[];
+};
+
+export type FavoritesParam = {
+  favoritesAnimes: string[];
+  favoritesSeries: string[];
 };
