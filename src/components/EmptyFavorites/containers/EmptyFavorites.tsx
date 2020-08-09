@@ -16,7 +16,7 @@ const EmptyFavorites = () => {
         type="Feather"
         style={createDynamicStyles<TextStyle>({ color: colors.DETAILS_LIGHT, fontSize: 70 })}
       />
-      <Text style={createDynamicStyles<TextStyle>({ color: colors.DETAILS_LIGHT, fontSize: 18, marginVertical: 10 })}>
+      <Text style={createDynamicStyles<TextStyle>({ color: colors.DETAILS_LIGHT, fontSize: 18, marginVertical: 20 })}>
         You don't have favorites selected
       </Text>
     </View>

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   backArrow: {
     left: Platform.OS === 'ios' ? -7 : 0,
-    color: Platform.OS === 'ios' ? '#147EFB' : '#000',
+    color: Platform.OS === 'ios' ? '#147EFB' : '#fff',
     fontSize: Platform.OS === 'ios' ? 35 : 24,
   },
   backText: {
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     left: Platform.OS === 'ios' ? -18 : 0,
-    color: Platform.OS === 'ios' ? '#147EFB' : '#000',
+    color: Platform.OS === 'ios' ? '#147EFB' : '#fff',
     fontSize: 24,
   },
   recentWrapper: {

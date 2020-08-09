@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     width: LOCAL_DIMENSIONS.WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 20,
   },
 });
 
