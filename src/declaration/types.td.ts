@@ -116,3 +116,31 @@ export interface RelationshipLinks {
   self: string;
   related: string;
 }
+
+export interface OfflineAnime {
+  timestamp: number;
+  data: Anime[];
+}
+
+export interface AnimeOfflineData {
+  action: OfflineAnime;
+  drama: OfflineAnime;
+  fantasy: OfflineAnime;
+  romance: OfflineAnime;
+  scienceFiction: OfflineAnime;
+  thriller: OfflineAnime;
+}
+
+export interface MangaOfflineData {
+  action: OfflineAnime;
+  drama: OfflineAnime;
+  fantasy: OfflineAnime;
+  romance: OfflineAnime;
+  scienceFiction: OfflineAnime;
+  thriller: OfflineAnime;
+}
+
+export interface OfflineData {
+  animes: AnimeOfflineData;
+  mangas: MangaOfflineData;
+}

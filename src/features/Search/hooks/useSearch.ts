@@ -46,7 +46,7 @@ function useSearch() {
   }
 
   async function processAndPerformSearch(searchItem: string) {
-    if (isOnline) {
+    if (!isOnline) {
       Alert.alert(
         'Atention',
         "It appears you don't have internet connection so we couldn't perform the search. Check your network settings and try again"

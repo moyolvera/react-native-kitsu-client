@@ -16,7 +16,7 @@ function useAxiosRequest<T>(request: (params?: AnyType) => Promise<T | undefined
         dispatch({ type: 'failure', error: 'Error' });
       }
     } catch (error) {
-      dispatch({ type: 'failure', error: 'Error en catch' });
+      dispatch({ type: 'failure', error: 'Error' });
     }
   }
 

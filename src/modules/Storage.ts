@@ -2,9 +2,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { AnyType } from '../declaration/global.td';
 
 export enum StorageKeys {
-  RECENT_SEARCH = 'RECENT_SEARCH',
   FAVORITES = 'FAVORITES',
   MANGAS_FAVORITES = 'MANGAS_FAVORITES',
+  OFFLINE_DATA = 'OFFLINE_DATA',
+  RECENT_SEARCH = 'RECENT_SEARCH',
 }
 
 async function clearKey(key: StorageKeys) {
@@ -34,7 +35,6 @@ async function getKey(key: StorageKeys): Promise<string> {
 async function getTypedKey<T>(key: StorageKeys, defaultValue: T): Promise<T> {
   try {
     const json = (await AsyncStorage.getItem(key)) || '';
-    console.log({ json });
     return JSON.parse(json) as T;
   } catch (ex) {
     return defaultValue;
@@ -56,8 +56,6 @@ async function setKey(key: StorageKeys, value: AnyType): Promise<void> {
     if (typeof keyValue !== 'string') {
       keyValue = JSON.stringify(keyValue);
     }
-
-    console.log({ key, keyValue });
 
     return await AsyncStorage.setItem(key, keyValue);
   } catch (e) {
