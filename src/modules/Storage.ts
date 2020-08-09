@@ -4,6 +4,7 @@ import { AnyType } from '../declaration/global.td';
 export enum StorageKeys {
   RECENT_SEARCH = 'RECENT_SEARCH',
   FAVORITES = 'FAVORITES',
+  MANGAS_FAVORITES = 'MANGAS_FAVORITES',
 }
 
 async function clearKey(key: StorageKeys) {

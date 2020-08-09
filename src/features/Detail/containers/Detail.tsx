@@ -1,78 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import { Container, Content, View, Icon } from 'native-base';
-import { useRoute, RouteProp } from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import { ViewStyle, TextStyle } from 'react-native';
 
-import { AuthStackParamList } from '../../../navigator/Navigator';
-import { Anime } from '../../../declaration/types.td';
+import useDetail from '../hooks/useDetail';
 import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
-import styles from './Detail.styles';
 import { FastImageWrapper, Label } from '../../../components';
 import LOCAL_DIMENSIONS from '../../../constants/dimensions';
-import { ColorContext } from '../../../context/ColorContext';
-import { FavoritesContext } from '../../../context/FavoritesContext';
-import { ViewStyle, TextStyle } from 'react-native';
-import { setKey, StorageKeys } from '../../../modules/Storage';
+import styles from './Detail.styles';
 
 function Detail() {
-  const { params } = useRoute<RouteProp<AuthStackParamList, 'Detail'>>();
-  const { colors } = useContext(ColorContext);
-  const { favorites, setFavorites } = useContext(FavoritesContext);
-
-  const [itemSelected, setItemSelected] = useState<Anime>();
-  const [videoHeight, setVideoHeigght] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  async function verifyIsFavorite() {
-    if (!itemSelected || !itemSelected.id) {
-      console.log(isFavorite);
-      return;
-    }
-
-    const itemIsFavorite = favorites.some((item) => String(item) === String(itemSelected.id));
-    setIsFavorite(itemIsFavorite);
-  }
-  async function setItemAsFavorite() {
-    if (!itemSelected || !itemSelected.id || !setFavorites) {
-      return;
-    }
-
-    const updatedFavorites = [...favorites];
-    updatedFavorites.push(itemSelected.id);
-
-    await setKey(StorageKeys.FAVORITES, JSON.stringify(updatedFavorites));
-    setFavorites(updatedFavorites);
-  }
-
-  async function removeItemAsFavorite() {
-    if (!itemSelected || !itemSelected.id || !setFavorites) {
-      return;
-    }
-
-    const updatedFavorites = favorites.filter((item) => item !== itemSelected.id);
-
-    await setKey(StorageKeys.FAVORITES, JSON.stringify(updatedFavorites));
-    setFavorites(updatedFavorites);
-  }
-
-  async function toggleAsFavorite() {
-    if (!isFavorite) {
-      await setItemAsFavorite();
-    } else {
-      await removeItemAsFavorite();
-    }
-  }
-
-  useEffect(() => {
-    if (params?.item) {
-      console.log(params.item);
-      setItemSelected(params.item);
-    }
-  }, [params?.item]);
-
-  useEffect(() => {
-    verifyIsFavorite();
-  }, [favorites, itemSelected]);
+  const { colors, isFavorite, itemSelected, setVideoHeigght, toggleAsFavorite, videoHeight } = useDetail();
 
   return (
     <Container style={createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })}>

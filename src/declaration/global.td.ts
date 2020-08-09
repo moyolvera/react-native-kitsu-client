@@ -12,16 +12,17 @@ export type ColorScheme = {
   CONTAINER: string;
   BACKGROUND: string;
   DETAILS: string;
+  DETAILS_LIGHT: string;
   TEXT: string;
   STATUS_BAR: string;
 };
 
 export type FavoriteData<T> = {
   animes: T[];
-  series: T[];
+  mangas: T[];
 };
 
 export type FavoritesParam = {
   favoritesAnimes: string[];
-  favoritesSeries: string[];
+  favoritesMangas: string[];
 };

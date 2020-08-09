@@ -4,13 +4,14 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import AnimatedTabBar from '@gorhom/animated-tabbar';
 
-import { Animes, Favorites } from '../features';
+import { Animes, Favorites, Mangas } from '../features';
 import { ColorContext } from '../context/ColorContext';
-import { getTabsConfig, getTabBarOptions } from './config/TabBarNavigator.config';
+import { getTabsConfig, getTabBarOptions } from './config/Navigators.config';
 
 export type TabStackParamList = {
   Animes: { paddingBottom?: number };
   Favorites: { paddingBottom?: number };
+  Mangas: { paddingBottom?: number };
 };
 
 const Tab = createBottomTabNavigator<TabStackParamList>();
@@ -55,6 +56,7 @@ function TabBarNavigator() {
         />
       )}>
       <Tab.Screen name="Animes" component={Animes} initialParams={{ paddingBottom: screenPaddingBottom }} />
+      <Tab.Screen name="Mangas" component={Mangas} initialParams={{ paddingBottom: screenPaddingBottom }} />
       <Tab.Screen name="Favorites" component={Favorites} initialParams={{ paddingBottom: screenPaddingBottom }} />
     </Tab.Navigator>
   );

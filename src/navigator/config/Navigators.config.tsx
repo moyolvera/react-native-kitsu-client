@@ -1,9 +1,11 @@
 import React from 'react';
-import { TabsConfig, FlashyTabBarItemConfig } from '@gorhom/animated-tabbar';
 import { Icon } from 'native-base';
 import { ViewStyle } from 'react-native';
+import { TabsConfig, FlashyTabBarItemConfig } from '@gorhom/animated-tabbar';
+import { getFocusedRouteNameFromRoute, RouteProp } from '@react-navigation/native';
 
 import { ColorScheme } from '../../declaration/global.td';
+import { AuthStackParamList } from '../Navigator';
 
 const getTabsConfig = (colors: ColorScheme): TabsConfig<FlashyTabBarItemConfig> => ({
   Animes: {
@@ -11,12 +13,25 @@ const getTabsConfig = (colors: ColorScheme): TabsConfig<FlashyTabBarItemConfig> 
       color: colors.TEXT,
     },
     icon: {
-      component: ({ color, size }) => <Icon name="activity" type="Feather" style={{ color, fontSize: size }} />,
+      component: ({ color, size }) => <Icon name="airplay" type="Feather" style={{ color, fontSize: size }} />,
       color: '#666',
     },
     indicator: {
       size: 4,
       color: '#5B37B7',
+    },
+  },
+  Mangas: {
+    labelStyle: {
+      color: colors.TEXT,
+    },
+    icon: {
+      component: ({ color, size }) => <Icon name="film" type="Feather" style={{ color, fontSize: size }} />,
+      color: '#666',
+    },
+    indicator: {
+      size: 4,
+      color: '#ffa700',
     },
   },
   Favorites: {
@@ -55,4 +70,8 @@ const getTabBarOptions = (colors: ColorScheme, marginBottom: number): ViewStyle 
   elevation: 24,
 });
 
-export { getTabsConfig, getTabBarOptions };
+const getHeaderTitle = (route: RouteProp<AuthStackParamList, 'Home'>) => {
+  return getFocusedRouteNameFromRoute(route) ?? 'Animes';
+};
+
+export { getHeaderTitle, getTabsConfig, getTabBarOptions };

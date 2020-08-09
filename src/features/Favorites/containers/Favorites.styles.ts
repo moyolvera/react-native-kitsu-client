@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   itemsWrapper: {
-    paddingHorizontal: 10,
+    paddingRight: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',

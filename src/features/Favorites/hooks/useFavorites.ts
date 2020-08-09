@@ -10,18 +10,24 @@ import { useFocusEffect } from '@react-navigation/native';
 function useFavorites() {
   const { colors } = useContext(ColorContext);
   const [animes, setAnimes] = useState<Anime[]>([]);
+  const [mangas, setMangas] = useState<Anime[]>([]);
   const getFavoritesItemsRequest: AxiosRequestResult<FavoriteData<Anime>> = useAxiosRequest<FavoriteData<Anime>>(
     getFavoritesItems
   );
 
   async function getFavoritesFromStorage() {
     const favoritesFromStorage = await getTypedKey<string[]>(StorageKeys.FAVORITES, []);
-    getFavoritesItemsRequest.triggerRequest({ favoritesAnimes: favoritesFromStorage, favoritesSeries: [] });
+    const mangasFavoritesFromStorage = await getTypedKey<string[]>(StorageKeys.MANGAS_FAVORITES, []);
+    getFavoritesItemsRequest.triggerRequest({
+      favoritesAnimes: favoritesFromStorage,
+      favoritesMangas: mangasFavoritesFromStorage,
+    });
   }
 
   function handleSearchItemsRequest(getFavoritesItemsResult: AxiosRequestResult<FavoriteData<Anime>>) {
     if (getFavoritesItemsResult.state.data) {
       setAnimes(getFavoritesItemsResult.state.data.animes);
+      setMangas(getFavoritesItemsResult.state.data.mangas);
     }
   }
 
@@ -43,6 +49,7 @@ function useFavorites() {
     animes,
     colors,
     isLoading: getFavoritesItemsRequest.state.isLoading,
+    mangas,
   };
 }
 

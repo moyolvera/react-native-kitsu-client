@@ -9,6 +9,7 @@ import { createDynamicStyles } from '../styles/CommonStyles';
 import { ViewStyle, TextStyle } from 'react-native';
 import { ColorContext } from '../context/ColorContext';
 import TabBarNavigator from './TabBarNavigator';
+import { getHeaderTitle } from './config/Navigators.config';
 
 export type AuthStackParamList = {
   Home: undefined;
@@ -37,10 +38,10 @@ function Navigator() {
         <Stack.Screen
           name="Home"
           component={TabBarNavigator}
-          options={{
-            headerTitle: 'Kitsu',
+          options={({ route }) => ({
+            headerTitle: getHeaderTitle(route),
             headerRight: () => <HeaderSearchButton />,
-          }}
+          })}
         />
         <Stack.Screen name="Detail" component={Detail} />
         <Stack.Screen name="Search" component={Search} options={{ header: () => <></> }} />
