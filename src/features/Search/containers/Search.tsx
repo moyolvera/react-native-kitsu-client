@@ -23,6 +23,7 @@ const Search = () => {
     search,
     searchItems,
     shouldShowRecentList,
+    sourceScreen,
   } = useSearch();
 
   return (
@@ -53,7 +54,7 @@ const Search = () => {
             <Icon name="search" type="Feather" style={styles.inputSearchIcon} />
             <TextInput
               ref={inputRef}
-              placeholder="Search"
+              placeholder={`Search ${sourceScreen}`}
               style={styles.input}
               value={search}
               onChangeText={handleSearchChange}

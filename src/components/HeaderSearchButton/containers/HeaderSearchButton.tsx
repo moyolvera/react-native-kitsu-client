@@ -8,7 +8,7 @@ import styles from './HeaderSearchButton.styles';
 import { createDynamicStyles } from '../../../styles/CommonStyles';
 import { ColorContext } from '../../../context/ColorContext';
 
-function HeaderSearchButton() {
+function HeaderSearchButton({ name }: { name: string }) {
   const { colors } = useContext(ColorContext);
   const { navigate } = useNavigation();
 
@@ -16,7 +16,7 @@ function HeaderSearchButton() {
     <TouchableOpacity
       style={styles.wrapper}
       onPress={() => {
-        navigate(SCREENS.SEARCH);
+        navigate(SCREENS.SEARCH, { sourceScreen: name });
       }}>
       <Icon
         name="search"

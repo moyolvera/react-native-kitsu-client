@@ -14,7 +14,7 @@ import { getHeaderTitle } from './config/Navigators.config';
 export type AuthStackParamList = {
   Home: undefined;
   Detail: { item: Anime };
-  Search: undefined;
+  Search: { sourceScreen: string };
 };
 
 const Stack = createStackNavigator<AuthStackParamList>();
@@ -40,7 +40,7 @@ function Navigator() {
           component={TabBarNavigator}
           options={({ route }) => ({
             headerTitle: getHeaderTitle(route),
-            headerRight: () => <HeaderSearchButton />,
+            headerRight: () => <HeaderSearchButton name={getHeaderTitle(route)} />,
           })}
         />
         <Stack.Screen name="Detail" component={Detail} />

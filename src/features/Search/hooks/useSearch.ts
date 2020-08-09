@@ -1,23 +1,30 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { AxiosRequestResult } from '../../../declaration/global.td';
 import { Anime } from '../../../declaration/types.td';
 import useAxiosRequest from '../../../hooks/useAxiosRequest';
-import { getSearchItems } from '../services/SearchService';
+import { getSearchAnimes, getSearchMangas } from '../services/SearchService';
 import { getTypedKey, setKey, StorageKeys } from '../../../modules/Storage';
 import { ColorContext } from '../../../context/ColorContext';
+import { AuthStackParamList } from '../../../navigator/Navigator';
+import { ITEM_TYPE } from '../../../constants/common';
 
 function useSearch() {
   const inputRef = React.createRef<TextInput>();
   const { goBack } = useNavigation();
   const { colors } = useContext(ColorContext);
-  const searchItemsRequest: AxiosRequestResult<Anime[]> = useAxiosRequest<Anime[]>(getSearchItems);
+  const { params } = useRoute<RouteProp<AuthStackParamList, 'Search'>>();
 
   const [search, setSearch] = useState('');
   const [searchItems, setSearchItems] = useState<Anime[]>([]);
   const [recentItems, setRecentItems] = useState<string[]>([]);
   const [shouldShowRecentList, setShouldShowRecentList] = useState(true);
+  const [sourceScreen, setSourceScreen] = useState('');
+
+  const searchItemsRequest: AxiosRequestResult<Anime[]> = useAxiosRequest<Anime[]>(
+    sourceScreen === ITEM_TYPE.MANGA_PLURAL ? getSearchMangas : getSearchAnimes
+  );
 
   function inputRecoverFocus() {
     if (!shouldShowRecentList) {
@@ -74,6 +81,12 @@ function useSearch() {
   }
 
   useEffect(() => {
+    if (params?.sourceScreen) {
+      setSourceScreen(params.sourceScreen);
+    }
+  }, [params?.sourceScreen]);
+
+  useEffect(() => {
     handleSearchItemsRequest(searchItemsRequest);
   }, [searchItemsRequest.state.isLoading]);
 
@@ -95,6 +108,7 @@ function useSearch() {
     search,
     searchItems,
     shouldShowRecentList,
+    sourceScreen,
   };
 }
 
