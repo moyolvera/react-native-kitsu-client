@@ -1,4 +1,5 @@
 import React from 'react';
+import { Root } from 'native-base';
 import Navigator from './navigator/Navigator';
 import ColorProvider from './context/ColorContext';
 import FavoritesAnimesContext from './context/FavoritesAnimesContext';
@@ -12,7 +13,9 @@ const App = () => {
         <ColorProvider>
           <FavoritesAnimesContext>
             <FavoritesMangasContext>
-              <Navigator />
+              <Root>
+                <Navigator />
+              </Root>
             </FavoritesMangasContext>
           </FavoritesAnimesContext>
         </ColorProvider>

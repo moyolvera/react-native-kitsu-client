@@ -58,7 +58,7 @@ function Detail() {
                 </View>
               </View>
             </View>
-            {itemSelected.attributes.youtubeVideoId && (
+            {itemSelected.attributes.youtubeVideoId !== undefined && itemSelected.attributes.youtubeVideoId !== '' && (
               <View style={{ width: LOCAL_DIMENSIONS.WIDTH, height: videoHeight }}>
                 <YoutubePlayer
                   onReady={() => setVideoHeigght(200)}
@@ -109,7 +109,6 @@ function Detail() {
       </Content>
       <Fab
         onPress={shareItem}
-        active
         style={createDynamicStyles<ViewStyle>({ backgroundColor: '#5067FF', bottom })}
         position="bottomRight">
         <Icon name="share" type="Feather" />

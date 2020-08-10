@@ -8,6 +8,7 @@ import { FavoritesMangasContext } from '../../../context/FavoritesMangasContext'
 import { Anime } from '../../../declaration/types.td';
 import { setKey, StorageKeys } from '../../../modules/Storage';
 import { ITEM_TYPE } from '../../../constants/common';
+import { Toast } from 'native-base';
 
 function useDetail() {
   const { params } = useRoute<RouteProp<AuthStackParamList, 'Detail'>>();
@@ -122,8 +123,10 @@ function useDetail() {
   async function toggleAsFavorite() {
     if (!isFavorite) {
       await setItemAsFavorite();
+      Toast.show({ text: 'Item has been added to favorites', position: 'top', style: { top: 20 } });
     } else {
       await removeItemAsFavorite();
+      Toast.show({ text: 'Item has been removed from favorites', position: 'top', style: { top: 20 } });
     }
   }
 
