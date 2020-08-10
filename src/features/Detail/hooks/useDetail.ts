@@ -1,3 +1,4 @@
+import Share from 'react-native-share';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { AuthStackParamList } from '../../../navigator/Navigator';
 import { useContext, useState, useEffect } from 'react';
@@ -126,9 +127,25 @@ function useDetail() {
     }
   }
 
+  async function shareItem() {
+    if (!itemSelected) {
+      return;
+    }
+
+    try {
+      const url = 'https://kitsu.io/' + itemSelected.type + '/' + itemSelected.attributes.slug;
+      await Share.open({
+        title: 'Share item',
+        message: 'React Native Kistu client app.',
+        url,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (params?.item) {
-      console.log(params.item);
       setItemSelected(params.item);
     }
   }, [params?.item]);
@@ -142,6 +159,7 @@ function useDetail() {
     isFavorite,
     itemSelected,
     setVideoHeigght,
+    shareItem,
     toggleAsFavorite,
     videoHeight,
   };

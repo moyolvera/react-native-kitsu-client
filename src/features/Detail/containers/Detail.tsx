@@ -1,7 +1,8 @@
 import React from 'react';
-import { Content, View, Icon } from 'native-base';
+import { Content, View, Icon, Fab } from 'native-base';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ViewStyle, TextStyle } from 'react-native';
+import { useSafeArea } from 'react-native-safe-area-context';
 
 import useDetail from '../hooks/useDetail';
 import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
@@ -10,7 +11,8 @@ import LOCAL_DIMENSIONS from '../../../constants/dimensions';
 import styles from './Detail.styles';
 
 function Detail() {
-  const { colors, isFavorite, itemSelected, setVideoHeigght, toggleAsFavorite, videoHeight } = useDetail();
+  const { bottom } = useSafeArea();
+  const { colors, isFavorite, itemSelected, setVideoHeigght, shareItem, toggleAsFavorite, videoHeight } = useDetail();
 
   return (
     <FeatureContainer styles={createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })}>
@@ -105,6 +107,13 @@ function Detail() {
           </>
         )}
       </Content>
+      <Fab
+        onPress={shareItem}
+        active
+        style={createDynamicStyles<ViewStyle>({ backgroundColor: '#5067FF', bottom })}
+        position="bottomRight">
+        <Icon name="share" type="Feather" />
+      </Fab>
     </FeatureContainer>
   );
 }

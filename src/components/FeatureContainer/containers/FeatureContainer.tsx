@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Container } from 'native-base';
+import { Container, Fab, Icon, Button } from 'native-base';
 import { ViewStyle, StyleProp } from 'react-native';
 
 import Loader from '../../Loader/containers/Loader';
