@@ -8,6 +8,7 @@ import { FavoritesMangasContext } from '../../../context/FavoritesMangasContext'
 import { Anime } from '../../../declaration/types.td';
 import { setKey, StorageKeys } from '../../../modules/Storage';
 import { ITEM_TYPE, BASE_URL } from '../../../constants/common';
+import { useSafeArea } from 'react-native-safe-area-context';
 
 function useDetail() {
   const { params } = useRoute<RouteProp<AuthStackParamList, 'Detail'>>();
@@ -18,6 +19,7 @@ function useDetail() {
   const [itemSelected, setItemSelected] = useState<Anime>();
   const [videoHeight, setVideoHeigght] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+  const { bottom } = useSafeArea();
 
   function verifyAnimeIsFavorite() {
     if (!itemSelected || !itemSelected.id) {
@@ -146,6 +148,7 @@ function useDetail() {
 
   useEffect(() => {
     if (params?.item) {
+      console.log(params.item);
       setItemSelected(params.item);
     }
   }, [params?.item]);
@@ -155,6 +158,7 @@ function useDetail() {
   }, [favoritesAnimes, favoritesMangas, itemSelected]);
 
   return {
+    bottom,
     colors,
     isFavorite,
     itemSelected,

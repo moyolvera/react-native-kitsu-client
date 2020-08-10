@@ -16,8 +16,8 @@ enum CONTENT_CATEGORIES {
   THRILLER = 'thriller',
 }
 
-const BASE_URL = 'https://kitsu.io/';
-const BASE_API_PREFIX = BASE_URL + 'api/edge/';
+const BASE_URL = 'https://kitsu.io';
+const BASE_API_PREFIX = BASE_URL + '/api/edge';
 
 const DEFAULT_OFFLINE_DATA: OfflineData = {
   animes: {

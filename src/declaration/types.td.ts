@@ -14,12 +14,14 @@ export interface KitsuRequestLinks {
   last: string;
 }
 
+export type RelationshipItem = 'animeCharacters' | 'episodes';
+
 export interface Anime {
   id: string;
   type: string;
   links: AnimeLinks;
   attributes: Attributes;
-  relationships: { [key: string]: Relationship };
+  relationships: { [key in RelationshipItem]: Relationship };
 }
 
 export interface Attributes {
@@ -143,4 +145,47 @@ export interface MangaOfflineData {
 export interface OfflineData {
   animes: AnimeOfflineData;
   mangas: MangaOfflineData;
+}
+
+export interface Episode {
+  id: string;
+  type: string;
+  links: EpisodeLinks;
+  attributes: EpisodeAttributes;
+  relationships: EpisodeRelationships;
+}
+export interface EpisodeLinks {
+  self: string;
+}
+export interface EpisodeAttributes {
+  createdAt: string;
+  updatedAt: string;
+  titles: EpisodeTitles;
+  canonicalTitle: string;
+  seasonNumber: number;
+  number: number;
+  relativeNumber: number;
+  synopsis: string;
+  airdate: string;
+  length: number;
+  thumbnail: EpisodeThumbnail;
+}
+export interface EpisodeTitles {
+  en_jp: string;
+  en_us: string;
+  ja_jp: string;
+}
+export interface EpisodeThumbnail {
+  original: string;
+}
+export interface EpisodeRelationships {
+  media: EpisodeMediaOrVideos;
+  videos: EpisodeMediaOrVideos;
+}
+export interface EpisodeMediaOrVideos {
+  links: EpisodeLinks1;
+}
+export interface EpisodeLinks1 {
+  self: string;
+  related: string;
 }
