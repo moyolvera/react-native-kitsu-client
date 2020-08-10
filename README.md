@@ -39,9 +39,9 @@ yarn install && yarn android
 ```
 
 ## Example
+![Example of the running app](https://media.giphy.com/media/TJrVCMNZ91bkzdc9Oz/giphy.gif)
+
 <p>
-  <img src="https://drive.google.com/uc?id=1yeXdXLKTnG3NKwuk-pC42C9Xfzy5k0FH" alt="Example of the running app">
-  <br>
   Or check the <a href="https://streamable.com/64xrhe">video</a> 
 </p>
 
