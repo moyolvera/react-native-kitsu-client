@@ -34,8 +34,14 @@ const CommonStyles = StyleSheet.create({
   marginBottom20: {
     marginBottom: 20,
   },
+  paddingVertical10: {
+    paddingVertical: 10,
+  },
   paddingHorizontal10: {
     paddingHorizontal: 10,
+  },
+  paddingHorizontal20: {
+    paddingHorizontal: 20,
   },
   paddingTop10: {
     paddingTop: 10,

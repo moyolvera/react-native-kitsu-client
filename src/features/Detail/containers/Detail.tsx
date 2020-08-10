@@ -2,17 +2,25 @@ import React from 'react';
 import { Content, View, Icon, Fab } from 'native-base';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ViewStyle, TextStyle } from 'react-native';
-import { useSafeArea } from 'react-native-safe-area-context';
 
 import useDetail from '../hooks/useDetail';
 import CommonStyles, { createDynamicStyles } from '../../../styles/CommonStyles';
-import { FastImageWrapper, Label, FeatureContainer } from '../../../components';
+import { FastImageWrapper, Label, FeatureContainer, ListEpisodes } from '../../../components';
 import LOCAL_DIMENSIONS from '../../../constants/dimensions';
 import styles from './Detail.styles';
+import { BASE_API_PREFIX } from '../../../constants/common';
 
 function Detail() {
-  const { bottom } = useSafeArea();
-  const { colors, isFavorite, itemSelected, setVideoHeigght, shareItem, toggleAsFavorite, videoHeight } = useDetail();
+  const {
+    bottom,
+    colors,
+    isFavorite,
+    itemSelected,
+    setVideoHeigght,
+    shareItem,
+    toggleAsFavorite,
+    videoHeight,
+  } = useDetail();
 
   return (
     <FeatureContainer styles={createDynamicStyles<ViewStyle>({ backgroundColor: colors.CONTAINER })}>
@@ -74,8 +82,13 @@ function Detail() {
                 />
               </View>
             )}
+            {itemSelected.relationships.episodes && (
+              <View style={[CommonStyles.paddingTop20, CommonStyles.paddingHorizontal10, CommonStyles.marginTop40]}>
+                <ListEpisodes source={itemSelected.relationships.episodes.links.related.replace(BASE_API_PREFIX, '')} />
+              </View>
+            )}
             <View style={CommonStyles.padding20}>
-              <View style={CommonStyles.marginTop40}>
+              <View>
                 <Label style={CommonStyles.bigFont} label="Genres" />
                 <Label label="Genres list" />
               </View>
