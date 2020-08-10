@@ -4,32 +4,50 @@ import { OfflineData } from '../../../declaration/types.td';
 
 async function getOfflineActionItems<T>() {
   const offlineData = await getTypedKey<OfflineData>(StorageKeys.OFFLINE_DATA, DEFAULT_OFFLINE_DATA);
-  return offlineData.mangas.action.data;
+  return {
+    status: true,
+    data: offlineData.mangas.action.data,
+  };
 }
 
 async function getOfflineThrillerItems<T>() {
   const offlineData = await getTypedKey<OfflineData>(StorageKeys.OFFLINE_DATA, DEFAULT_OFFLINE_DATA);
-  return offlineData.mangas.thriller.data;
+  return {
+    status: true,
+    data: offlineData.mangas.thriller.data,
+  };
 }
 
 async function getOfflineDramaItems<T>() {
   const offlineData = await getTypedKey<OfflineData>(StorageKeys.OFFLINE_DATA, DEFAULT_OFFLINE_DATA);
-  return offlineData.mangas.drama.data;
+  return {
+    status: true,
+    data: offlineData.mangas.drama.data,
+  };
 }
 
 async function getOfflineScienceFictionItems<T>() {
   const offlineData = await getTypedKey<OfflineData>(StorageKeys.OFFLINE_DATA, DEFAULT_OFFLINE_DATA);
-  return offlineData.mangas.scienceFiction.data;
+  return {
+    status: true,
+    data: offlineData.mangas.scienceFiction.data,
+  };
 }
 
 async function getOfflineRomanceItems<T>() {
   const offlineData = await getTypedKey<OfflineData>(StorageKeys.OFFLINE_DATA, DEFAULT_OFFLINE_DATA);
-  return offlineData.mangas.romance.data;
+  return {
+    status: true,
+    data: offlineData.mangas.romance.data,
+  };
 }
 
 async function getOfflineFantasyItems<T>() {
   const offlineData = await getTypedKey<OfflineData>(StorageKeys.OFFLINE_DATA, DEFAULT_OFFLINE_DATA);
-  return offlineData.mangas.fantasy.data;
+  return {
+    status: true,
+    data: offlineData.mangas.fantasy.data,
+  };
 }
 
 export {

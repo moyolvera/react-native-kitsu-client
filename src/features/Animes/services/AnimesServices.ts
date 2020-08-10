@@ -1,52 +1,68 @@
 import axios from 'axios';
 import { KitsuRequest } from '../../../declaration/types.td';
+import { stringFormat } from '../../../modules/Util';
+import API_ROUTE_MAP from '../../../constants/apiRouteMap';
+import { BASE_API_PREFIX } from '../../../constants/common';
+import { parseResponse, createErrorResponse, COMMON_ERROR_STRING } from '../../../modules/ApiHelper';
 
 async function getActionItems<T>() {
-  const request = await axios.get<KitsuRequest<T>>(
-    'https://kitsu.io/api/edge/trending/anime?limit=15&in_category=true&category=157'
-  );
+  try {
+    const request = await axios.get<KitsuRequest<T>>(stringFormat(API_ROUTE_MAP.ACTION_ANIME, BASE_API_PREFIX));
 
-  return request.data.data;
+    return parseResponse(request);
+  } catch (error) {
+    return createErrorResponse(COMMON_ERROR_STRING);
+  }
 }
 
 async function getThrillerItems<T>() {
-  const request = await axios.get<KitsuRequest<T>>(
-    'https://kitsu.io/api/edge/trending/anime?limit=15&in_category=true&category=159'
-  );
+  try {
+    const request = await axios.get<KitsuRequest<T>>(stringFormat(API_ROUTE_MAP.THRILLER_ANIME, BASE_API_PREFIX));
 
-  return request.data.data;
+    return parseResponse(request);
+  } catch (error) {
+    return createErrorResponse(COMMON_ERROR_STRING);
+  }
 }
 
 async function getDramaItems<T>() {
-  const request = await axios.get<KitsuRequest<T>>(
-    'https://kitsu.io/api/edge/trending/anime?limit=15&in_category=true&category=184'
-  );
+  try {
+    const request = await axios.get<KitsuRequest<T>>(stringFormat(API_ROUTE_MAP.DRAMA_ANIME, BASE_API_PREFIX));
 
-  return request.data.data;
+    return parseResponse(request);
+  } catch (error) {
+    return createErrorResponse(COMMON_ERROR_STRING);
+  }
 }
 
 async function getScienceFictionItems<T>() {
-  const request = await axios.get<KitsuRequest<T>>(
-    'https://kitsu.io/api/edge/trending/anime?limit=15&in_category=true&category=155'
-  );
+  try {
+    const request = await axios.get<KitsuRequest<T>>(stringFormat(API_ROUTE_MAP.SCIENCEFICTION_ANIME, BASE_API_PREFIX));
 
-  return request.data.data;
+    return parseResponse(request);
+  } catch (error) {
+    return createErrorResponse(COMMON_ERROR_STRING);
+  }
 }
 
 async function getRomanceItems<T>() {
-  const request = await axios.get<KitsuRequest<T>>(
-    'https://kitsu.io/api/edge/trending/anime?limit=15&in_category=true&category=164'
-  );
+  try {
+    const request = await axios.get<KitsuRequest<T>>(stringFormat(API_ROUTE_MAP.ROMANCE_ANIME, BASE_API_PREFIX));
 
-  return request.data.data;
+    return parseResponse(request);
+  } catch (error) {
+    return createErrorResponse(COMMON_ERROR_STRING);
+  }
 }
 
 async function getFantasyItems<T>() {
-  const request = await axios.get<KitsuRequest<T>>(
-    'https://kitsu.io/api/edge/trending/anime?limit=15&in_category=true&category=156'
-  );
+  try {
+    const request = await axios.get<KitsuRequest<T>>(stringFormat(API_ROUTE_MAP.FANTASY_ANIME, BASE_API_PREFIX));
 
-  return request.data.data;
+    return parseResponse(request);
+  } catch (error) {
+    return createErrorResponse(COMMON_ERROR_STRING);
+  }
 }
 
 export { getActionItems, getThrillerItems, getDramaItems, getScienceFictionItems, getRomanceItems, getFantasyItems };

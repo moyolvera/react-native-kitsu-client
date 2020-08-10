@@ -3,6 +3,8 @@ import { AxiosRequestState } from '../modules/AxiosRequestReducer';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyType = any;
 
+export type AxiosService<T> = (params?: AnyType) => Promise<{ status: boolean; data: T | undefined }>;
+
 export type AxiosRequestResult<T> = {
   state: AxiosRequestState<T>;
   triggerRequest: (params?: AnyType) => Promise<void>;

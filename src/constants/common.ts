@@ -16,6 +16,9 @@ enum CONTENT_CATEGORIES {
   THRILLER = 'thriller',
 }
 
+const BASE_URL = 'https://kitsu.io/';
+const BASE_API_PREFIX = BASE_URL + 'api/edge/';
+
 const DEFAULT_OFFLINE_DATA: OfflineData = {
   animes: {
     action: {
@@ -71,4 +74,4 @@ const DEFAULT_OFFLINE_DATA: OfflineData = {
   },
 };
 
-export { ITEM_TYPE, CONTENT_CATEGORIES, DEFAULT_OFFLINE_DATA };
+export { BASE_URL, BASE_API_PREFIX, ITEM_TYPE, CONTENT_CATEGORIES, DEFAULT_OFFLINE_DATA };

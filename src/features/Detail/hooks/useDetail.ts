@@ -7,8 +7,7 @@ import { FavoritesAnimesContext } from '../../../context/FavoritesAnimesContext'
 import { FavoritesMangasContext } from '../../../context/FavoritesMangasContext';
 import { Anime } from '../../../declaration/types.td';
 import { setKey, StorageKeys } from '../../../modules/Storage';
-import { ITEM_TYPE } from '../../../constants/common';
-import { Toast } from 'native-base';
+import { ITEM_TYPE, BASE_URL } from '../../../constants/common';
 
 function useDetail() {
   const { params } = useRoute<RouteProp<AuthStackParamList, 'Detail'>>();
@@ -123,10 +122,8 @@ function useDetail() {
   async function toggleAsFavorite() {
     if (!isFavorite) {
       await setItemAsFavorite();
-      Toast.show({ text: 'Item has been added to favorites', position: 'top', style: { top: 20 } });
     } else {
       await removeItemAsFavorite();
-      Toast.show({ text: 'Item has been removed from favorites', position: 'top', style: { top: 20 } });
     }
   }
 
@@ -136,7 +133,7 @@ function useDetail() {
     }
 
     try {
-      const url = 'https://kitsu.io/' + itemSelected.type + '/' + itemSelected.attributes.slug;
+      const url = BASE_URL + itemSelected.type + '/' + itemSelected.attributes.slug;
       await Share.open({
         title: 'Share item',
         message: 'React Native Kistu client app.',

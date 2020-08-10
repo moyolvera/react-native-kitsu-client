@@ -3,7 +3,7 @@ import { View } from 'native-base';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { Anime } from '../../../declaration/types.td';
-import { AxiosRequestResult } from '../../../declaration/global.td';
+import { AxiosRequestResult, AxiosService } from '../../../declaration/global.td';
 import FastImageWrapper from '../../FastImageWrapper/containers/FastImageWrapper';
 import useAxiosRequest from '../../../hooks/useAxiosRequest';
 import useOfflineStorage from '../../../hooks/useOfflineStorage';
@@ -19,7 +19,7 @@ function SectionSlider({
   section,
 }: {
   title: string;
-  service: () => Promise<Anime[]>;
+  service: AxiosService<Anime[]>;
   type: ITEM_TYPE;
   section: CONTENT_CATEGORIES;
 }) {
