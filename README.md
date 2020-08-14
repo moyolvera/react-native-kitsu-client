@@ -6,7 +6,7 @@
   </a>
 </p>
 
-> Kistu API consumer project built on React Native as a challenge from Applaudo studios for a React Native Developer position.
+> Kistu API consumer project built on React Native as a personal challenge.
 
 ## Features
 
